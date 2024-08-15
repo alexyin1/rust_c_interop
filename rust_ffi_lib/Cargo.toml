@@ -3,8 +3,11 @@ name = "rust_ffi_lib"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
-
 # need two builds, cdylib for .c linking, lib for rust linking
 [lib]
 crate-type = ["cdylib", "lib"]
+
+[dependencies]
+iceberg = { git = "https://github.com/apache/iceberg-rust", rev = "0942e3cd34d0fd19d7b825feafe67428e703a3f5" }
+iceberg-catalog-rest = { git = "https://github.com/apache/iceberg-rust", rev = "0942e3cd34d0fd19d7b825feafe67428e703a3f5" }
+tokio = { version = "1", features = ["full"] }

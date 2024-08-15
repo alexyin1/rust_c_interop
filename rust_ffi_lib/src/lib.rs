@@ -1,6 +1,6 @@
 mod ffi_util;
 
-use crate::ffi_util::{ffi_convert, samples};
+use crate::ffi_util::{blocking_iceberg, ffi_convert, samples};
 use std::os::raw::c_char;
 
 // note: the string returned from this function cannot be resized in c!
@@ -27,4 +27,16 @@ pub unsafe extern "C" fn get_raw_names_vec() -> ffi_convert::StringArray {
 #[no_mangle]
 pub unsafe extern "C" fn free_raw_stringarray(array: ffi_convert::StringArray) {
     ffi_convert::free_raw_stringarray(array);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn list_namespaces() -> ffi_convert::NamespaceIdentArray {
+    let namespaces = blocking_iceberg::list_namespaces();
+    // println!("RUST: {:?}\n", namespaces);
+    ffi_convert::to_const_raw_ns_arr(namespaces)
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_namespaces_vec(array: ffi_convert::NamespaceIdentArray) {
+    ffi_convert::free_raw_ns_array(array);
 }
