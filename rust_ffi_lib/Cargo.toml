@@ -1,0 +1,10 @@
+[package]
+name = "rust_ffi_lib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# need two builds, cdylib for .c linking, lib for rust linking
+[lib]
+crate-type = ["cdylib", "lib"]

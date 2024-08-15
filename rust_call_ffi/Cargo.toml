@@ -1,0 +1,7 @@
+[package]
+name = "rust_call_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rust_ffi_lib = { path = "../rust_ffi_lib" }
